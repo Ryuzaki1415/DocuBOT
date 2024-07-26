@@ -1,0 +1,13 @@
+documentation_task:
+  description: >
+    Use {repo_name} as the name of the repository when cusing the Github_to_text_file tool.Use the Github_to_text_file tool to convert the contents of the github repo into a text file.Exectue this step only once. 
+  expected_output: >
+    A string output of "Success".
+
+
+documentation_review_task:
+  description: >
+    Use the tool "File_read" to read the content of a text file and prepare a well detailed markdown documentation of the project that you have recieved and enhance it so that it is easily readable and understandable.
+  expected_output: >
+    A fully fledge markdown report of the text file with the mains topics, each with a full section of information,
+    Formatted as markdown without '```'.
