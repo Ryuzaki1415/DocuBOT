@@ -20,7 +20,7 @@ os.environ["OPENAI_API_KEY"] = "NA"
 groqllm = ChatGroq(
             temperature=0, 
             groq_api_key = os.environ.get('GROQ_API_KEY'), 
-            model_name='llama3-70b-8192'
+            model_name='Mixtral-8x7b-32768'
         )
 
 
@@ -111,8 +111,8 @@ class DocubotCrew():
 	def crew(self) -> Crew:
 		"""Creates the Docubot crew"""
 		return Crew(
-			agents=self.agents, # Automatically created by the @agent decorator
-			tasks=self.tasks, # Automatically created by the @task decorator
+			agents=self.agents,
+			tasks=self.tasks,
 			process=Process.sequential,
 			verbose=2,
 			

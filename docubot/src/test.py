@@ -1,46 +1,47 @@
 import requests
-import base64
-from urllib.parse import urljoin
+import os
 
-def download_github_repo_to_txt(token, repo_name, output_file='repo_contents.txt'):
+def select_github_repo(username, token=None):
+    # GitHub API endpoint for user repositories
+    url = f"https://api.github.com/users/{username}/repos"
     
-    # GitHub API base URL
-    base_url = "https://api.github.com/"
+    # Set up headers if token is provided
+    headers = {"Authorization": f"token {token}"} if token else {}
     
-    # Set up headers for authentication
-    headers = {
-        "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.v3+json"
-    }
+    # Make the API request
+    response = requests.get(url, headers=headers)
     
-    def get_content(path=''):
-        # Get repository contents
-        repo_url = urljoin(base_url, f"repos/{repo_name}/contents/{path}")
-        response = requests.get(repo_url, headers=headers)
-        response.raise_for_status()
-        return response.json()
+    # Check if the request was successful
+    if response.status_code != 200:
+        print(f"Error: Unable to fetch repositories. Status code: {response.status_code}")
+        return None
+    
+    # Parse the JSON response
+    repos = response.json()
+    
+    # Display the list of repositories
+    print(f"Repositories for {username}:")
+    for i, repo in enumerate(repos, 1):
+        print(f"{i}. {repo['name']}")
+    
+    # Get user selection
+    while True:
+        try:
+            selection = int(input("Enter the number of the repository you want to select: "))
+            if 1 <= selection <= len(repos):
+                selected_repo = repos[selection - 1]['name']
+                return selected_repo
+            else:
+                print("Invalid selection. Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
 
-    def write_content(item, file):
-        if item['type'] == 'file':
-            # If it's a file, download and write its content
-            file_content = requests.get(item['download_url'], headers=headers).text
-            file.write(f"\n\n--- File: {item['path']} ---\n\n")
-            file.write(file_content)
-        elif item['type'] == 'dir':
-            # If it's a directory, recurse into it
-            dir_contents = get_content(item['path'])
-            for sub_item in dir_contents:
-                write_content(sub_item, file)
-
-    # Open the output file and start writing
-    with open(output_file, 'w', encoding='utf-8') as f:
-        contents = get_content()
-        for item in contents:
-            write_content(item, f)
-
-    print(f"Repository contents have been saved to {output_file}")
-
-# Example usage:
-github_token = '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'
-repository = "Ryuzaki1415/Dummy-Repo"
-download_github_repo_to_txt(github_token, repository)
+# Example usage
+if __name__ == "__main__":
+    username = "#######"  # Replace with the GitHub username you want to query
+    token = os.environ.get('GITHUB_TOKEN')  # Replace with your GitHub personal access token if needed
+    
+    selected_repo = select_github_repo(username, token)
+    if selected_repo:
+        print(f"You selected: {selected_repo}")
+        # You can now use 'selected_repo' in your code

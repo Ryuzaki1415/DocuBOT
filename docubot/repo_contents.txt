@@ -1,37 +1,100 @@
 
 
---- File: project.html ---
+--- File: simple_page.html ---
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enhanced Minimal Page</title>
-<style>
-body{font-family:Arial,sans-serif;display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;margin:0;background:linear-gradient(135deg,#f5f7fa,#c3cfe2);}
-.container{text-align:center;background:white;padding:20px;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
-h1{color:#333;margin-bottom:20px;}
-button{padding:10px 20px;font-size:16px;cursor:pointer;background:#4CAF50;color:white;border:none;border-radius:4px;transition:background 0.3s;}
-button:hover{background:#45a049;}
-#counter{font-size:24px;margin:20px 0;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Click Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            transition: background-color 0.5s;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        #counter {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        #goal {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        #notification {
+            font-size: 18px;
+            color: green;
+            margin-top: 10px;
+            height: 20px;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<h1>Click Counter</h1>
-<button id="clickBtn">Click me</button>
-<p id="counter">0</p>
-</div>
-<script>
-let count=0;
-const btn=document.getElementById('clickBtn');
-const counter=document.getElementById('counter');
-btn.addEventListener('click',()=>{
-count++;
-counter.textContent=count;
-if(count===10)alert('You reached 10 clicks!');
-});
-</script>
+    <div class="container">
+        <div id="goal">Goal: 10 clicks</div>
+        <button id="clickButton">Click Me!</button>
+        <button id="resetButton">Reset</button>
+        <div id="counter">Clicks: 0</div>
+        <button id="colorButton">Change Color</button>
+        <div id="notification"></div>
+    </div>
+    <script>
+        let count = 0;
+        const goal = 10;
+        const button = document.getElementById('clickButton');
+        const resetButton = document.getElementById('resetButton');
+        const colorButton = document.getElementById('colorButton');
+        const counterDisplay = document.getElementById('counter');
+        const notificationDisplay = document.getElementById('notification');
+
+        button.addEventListener('click', () => {
+            count++;
+            updateCounter();
+            checkGoal();
+        });
+
+        resetButton.addEventListener('click', () => {
+            count = 0;
+            updateCounter();
+            notificationDisplay.textContent = '';
+            document.body.style.backgroundColor = '#f0f0f0';
+        });
+
+        colorButton.addEventListener('click', () => {
+            const randomColor = Math.floor(Math.random()*16777215).toString(16);
+            document.body.style.backgroundColor = "#" + randomColor;
+        });
+
+        function updateCounter() {
+            counterDisplay.textContent = `Clicks: ${count}`;
+        }
+
+        function checkGoal() {
+            if (count === goal) {
+                notificationDisplay.textContent = 'Goal reached!';
+            } else if (count > goal) {
+                notificationDisplay.textContent = 'Wow! You exceeded the goal!';
+            }
+        }
+    </script>
 </body>
 </html>
