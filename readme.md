@@ -1,4 +1,4 @@
-# DOCUBOT
+# DOCUBOT ⚡📗
 
 ![Static Badge](https://img.shields.io/badge/Ollama-brightgreen) ![Static Badge](https://img.shields.io/badge/crewai-red) ![Static Badge](https://img.shields.io/badge/Groq-orange)
 
@@ -50,7 +50,7 @@ The DocuBot Crew is composed of multiple AI agents, each with unique roles, goal
 
 ### Structure
 
--`src/docubot/crew.py` Contains the main logic and agent and task configuration.
+-`src/docubot/crew.py` Contains the main logic and agent and task configuration.<br>
 -`src/docubot/main.py` handles custom inputs and Driver code for the entire crew.
 
 ### Result
