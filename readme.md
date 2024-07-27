@@ -68,3 +68,6 @@ Agent Function calling.
 
 ### Generated Document
 
+Final report can be seen inside https://github.com/Ryuzaki1415/DocuBOT/blob/master/docubot/report.md
+
+
