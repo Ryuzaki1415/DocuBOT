@@ -53,7 +53,18 @@ The DocuBot Crew is composed of multiple AI agents, each with unique roles, goal
 -`src/docubot/crew.py` Contains the main logic and agent and task configuration.
 -`src/docubot/main.py` handles custom inputs and Driver code for the entire crew.
 
+### Result
+Final Generated Markdown would be saved in your computer.
+
 
 ### Screenshots
+Main menu.
+![Alt text](https://github.com/Ryuzaki1415/DocuBOT/blob/master/assets/Screenshot%202024-07-27%20201253.png)
+Agent Function calling.
+![Alt text](https://github.com/Ryuzaki1415/DocuBOT/blob/master/assets/Screenshot%202024-07-27%20201339.png)
+![Alt text](https://github.com/Ryuzaki1415/DocuBOT/blob/master/assets/Screenshot%202024-07-27%20201518.png)
+![Alt text](https://github.com/Ryuzaki1415/DocuBOT/blob/master/assets/Screenshot%202024-07-27%20201542.png)
+![Alt text](https://github.com/Ryuzaki1415/DocuBOT/blob/master/assets/Screenshot%202024-07-27%20201613.png)
 
+### Generated Document
 
